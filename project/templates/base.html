@@ -1,0 +1,47 @@
+{% from 'bootstrap5/nav.html' import render_nav_item %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Meta tags -->  
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>somethingGreen</title>
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code">
+        {% endblock %}
+
+        {% endblock %}
+    </head>
+    <body>
+      <div class="pattern" >
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-primary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/"><light>something</light><strong>Green</strong></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  {{ render_nav_item('main.profile', 'profile') }}
+                </div>
+              </div>
+            </div>
+          </nav>
+          
+          {% block content %}{% endblock %}
+         
+        {% block scripts %}
+            <!-- Bootstrap JS -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+      </div>
+    </body>
+</html>
