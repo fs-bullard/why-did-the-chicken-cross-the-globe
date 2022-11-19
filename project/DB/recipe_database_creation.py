@@ -59,7 +59,9 @@ for link in links:
     json_object = json.loads(details.contents[0])
 
     title = json_object['props']['pageProps']['title']
-    serves = json_object['props']['pageProps']['servings'].split(' ')[-1]
+    serves = json_object['props']['pageProps']['servings'].split(' ')[1]
+    if 'enough' in serves:
+        serves = 3
     description = json_object['props']['pageProps']['description'][3:-4]
     url = json_object['props']['pageProps']['image']['url']
     nutrition_info = json_object['props']['pageProps']['permutiveModel']['recipe']['nutrition_info']
@@ -88,7 +90,7 @@ for link in links:
                      'url': url,
                      'tags': tags,
                      'nutrition_info': nutrition_info,
-                     'serves': serves,
+                     'serves': int(serves),
                      'tags': tags,
                      'ingredients': ingredients,
                      'categories': categories,
