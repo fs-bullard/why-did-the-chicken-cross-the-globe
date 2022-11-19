@@ -21,7 +21,7 @@
         {% endblock %}
     </head>
     <body>
-      <div class="pattern" >
+      <div>
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-primary">
             <div class="container-fluid">
               <a class="navbar-brand" href="/"><light>something</light><strong>Green</strong></a>
@@ -30,7 +30,18 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                  {{ render_nav_item('main.profile', 'profile') }}
+                  
+                  {{ render_nav_item('main.index', 'Home') }}
+                  {% if current_user.is_authenticated %}
+                    {{ render_nav_item('main.profile', 'Profile') }}
+                  {% endif %}
+                  {% if not current_user.is_authenticated %}
+                    {{ render_nav_item('auth.login', 'Log In')}}
+                    {{ render_nav_item('auth.signup', 'Sign Up')}}
+                  {% endif %}
+                  {% if current_user.is_authenticated %}
+                    {{ render_nav_item('auth.logout', 'Log Out')}}
+                  {% endif %}
                 </div>
               </div>
             </div>
