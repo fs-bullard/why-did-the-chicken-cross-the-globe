@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import Flask
-from flask import request, render_template, session
+from flask import request, render_template, session, redirect, url_for, flash
 from flask_login import login_required, current_user
 
 from . import db
@@ -16,3 +16,10 @@ def index():
 def profile():
     return render_template('profile.html', title='Profile', name=current_user.name)
 
+@main.route('/addlist')
+def add_list():
+    # If user isn't logged in, make them
+    if not current_user.is_authenticated:
+        flash('Please log in to add a new shopping list')
+        return redirect(url_for('auth.login'))
+    return render_template('new_list.html', title='New List')
