@@ -15,7 +15,11 @@
 <ul id="myUL">
     <!-- This is where the added ingredients go -->
 </ul>
-<a type="button" class="btn btn-primary" onclick="newList()" href="/recipes">Submit</a>
+<a type="button" class="btn btn-primary" onclick="newList()">Submit</a>
+
+<form id='dataForm' method='post' action='/recipes' style='display:none'>
+    <input id='shopping_list' type='text' name='shopping_list' action="#">
+</form> 
 
 <!-- <iframe src="https://immio1911.shinyapps.io/myapp/" width: 100%; height: 500px;> -->
 
@@ -72,7 +76,9 @@
     function newList() {
         console.log(Object.keys(ingredients));
         // Add shopping list to database
-
+        var shopping_list = document.getElementById('shopping_list');
+        shopping_list.setAttribute('value', Object.keys(ingredients));
+        document.getElementById('dataForm').submit();
     }
 
 
