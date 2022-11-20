@@ -1,4 +1,4 @@
-from .variables import category_map
+from variables import get_possible_foods, category_map
 import pandas as pd
 
 def get_recipes(ingredients):
