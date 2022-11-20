@@ -40,6 +40,15 @@ category_map = {
     'Wine': ['wine'],
     }
 
+conversion_dic = {
+    "g" : 0.001,
+    "kg" : 1,
+    "l": 1,
+    "ml": 0.001,
+    "tsp": 0.00492892,
+    "tbsp": 0.015,
+    }
+
 def get_possible_foods():
     possible_foods = []
     for key in category_map.keys():

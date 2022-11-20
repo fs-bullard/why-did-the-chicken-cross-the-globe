@@ -8,9 +8,13 @@ Created on Sat Nov 19 22:45:39 2022
 
 import numpy as np
 
-my_dic = {
-    "tbsp" : 78,
-    "tsp" : 235
+conversion_dic = {
+    "g" : 0.001,
+    "kg" : 1,
+    "l": 1,
+    "ml": 0.001,
+    "tsp": 0.00492892,
+    "tbsp": 0.015,
     }
 
 quantities = [
@@ -40,34 +44,48 @@ quantities = [
         ['300g', '300g', '1 tbsp', '1 large bunch of', '1 large', '2 tbsp', '1 tbsp', '50g', '200g']
        ]
 serves = [6,4,6,2,4,2,4,6,6,2,4,4,6,2,4,3,6,3,4,3,2,4,4,4]
-new_lst = []
-j=-1
-for lst in quantities:
-    for item in lst:
-        j+=1
-        #make the first word a number only
-        if item.split(' ')[0][-2] == 'k':
-            item = float(item.split('kg'))
-        elif item.split(' ')[0][-1] == 'g':
-            item = float(item.split('g'))
-        elif item.split(' ')[0][-1] == 'l':
-            item = float(item.split('l'))
-        elif item.split(' ')[0][-2] == 'm':
-            item = float(item.split('ml'))
-        if item[0][-1] == '½':
-            if item[0] == '½': item=item.replace('0.5')
-            else: item = item.replace('½', '.5')
-        # 
-        if len(item.split(' '))==1:
-            new_lst.append(item/serves[j])
-        if len(item.split(' '))==2:
-            
-    
-        
-    
-    
-#import pandas as pd
-#table = pd.read_excel('recipe_database.xlsx', index_col=0)
-#quantities = my_dic[8]
 
+syntaxed_quantities = []
+for quantity in quantities[0]:
+    syntaxed_quantity = quantity
+    if '½' in syntaxed_quantity:
+        syntaxed_quantity = quantity.replace('½', '.5')
+    if '¼' in syntaxed_quantity:
+        syntaxed_quantity = quantity.replace('¼', '.25')
+    syntaxed_quantities.append(syntaxed_quantity)
+
+
+kg_quantities = []
+for quantity in syntaxed_quantities:
+    kg_quantity = quantity
+    multiplier = 1
+    split_quantity = quantity.split(' ')
+    if 'x' in split_quantity:
+        multiplier = float(split_quantity[0])
+        split_quantity = split_quantity[2:]
+    if not quantity[0] in ['1','2','3','4','5','6','7','8','9','0','.']:
+        kg_quantity = 0 
+    elif split_quantity[0][-2:] == 'kg':
+        kg_quantity = float(split_quantity[0].split('kg')[0]) * conversion_dic['kg']
+    elif split_quantity[0][-1] == 'g':
+       kg_quantity = float(split_quantity[0].split('g')[0]) * conversion_dic['g']
+    elif split_quantity[0][-2:] == 'ml':
+        kg_quantity = float(split_quantity[0].split('ml')[0]) * conversion_dic['ml']
+    elif split_quantity[0][-1] == 'l':
+        kg_quantity = float(split_quantity[0].split('l')[0]) * conversion_dic['l']
+    elif 'tsp' in split_quantity:
+        kg_quantity = float(split_quantity[0]) * conversion_dic['tsp']
+    elif 'tbsp' in split_quantity:
+        if '-' in split_quantity[0]:
+             kg_quantity = float(split_quantity[0].split('-')[0]) * conversion_dic['tbsp']
+        else:
+            kg_quantity = float(split_quantity[0]) * conversion_dic['tbsp']
+    else:
+        try:
+            kg_quantity = float(quantity) * 0.1
+        except:
+            kg_quantity = 0
+    kg_quantities.append(kg_quantity*multiplier)
+
+print(kg_quantities)
 
