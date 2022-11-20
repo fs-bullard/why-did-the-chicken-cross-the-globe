@@ -5,6 +5,7 @@ from flask_login import login_required, current_user
 from .models import User
 from . import db
 import datetime
+from .get_recipes import get_recipes, get_recipe_data
 
 main = Blueprint('main', __name__)
 
@@ -29,10 +30,15 @@ def add_list():
 @login_required
 def recipes():
     ingredients = request.form.get('shopping_list')
-    print(ingredients)
+    if ',' in ingredients:
+        ingredients = ingredients.split(',')
+    else:
+        ingredients = [ingredients]
 
-    
+    recipes = get_recipes(ingredients)
+    recipes_data = get_recipe_data(recipes)
+    print(recipes_data)
 
-    return render_template('recipes.html', title='Recipes')
+    return render_template('recipes.html', title='Recipes', recipes=recipes_data, n=len(recipes))
 
 
