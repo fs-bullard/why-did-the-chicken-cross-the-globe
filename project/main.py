@@ -23,3 +23,8 @@ def add_list():
         flash('Please log in to add a new shopping list')
         return redirect(url_for('auth.login'))
     return render_template('new_list.html', title='New List')
+
+@main.route('/recipes')
+def recipes():
+    return render_template('recipes.html', title='Recipes')
+
