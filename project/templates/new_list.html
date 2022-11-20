@@ -2,6 +2,96 @@
 
 
 {% block content %}
-Carbon stuff 
+<div>
+    <h2>New Shopping List</h2>
+    <div>
+        <input type="input-group mp-3" id="ingredient" placeholder="Ingredient...">
+        <!-- <input type="input-group mp-3" id="weight" placeholder="Weight (g)..."> -->
+        <span type="button" onclick="newElement()" class="btn btn-primary">Add</span>
+
+    </div>
+</div>
+
+<ul id="myUL">
+
+</ul>
+<a type="button" class="btn btn-primary" onclick="newList()">Submit</a>
+
+<!-- <iframe src="https://immio1911.shinyapps.io/myapp/" width: 100%; height: 500px;> -->
+
+
+<script>
+    // Create a "close" button and append it to each list item
+    var myNodelist = document.getElementsByTagName("LI");
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
+    }
+    // Click on a "close" button to delete current list item
+    var close = document.getElementsByClassName("close")
+    var i;
+
+    // // Add a "checked" symbol when clicking on a list item
+    // var list = document.querySelector('ul');
+    // list.addEventListener('click', function(ev) {
+    // if (ev.target.tagName === 'LI') {
+    //     ev.target.classList.toggle('checked');
+    // }
+    // }, false);
+
+    // Create a new list item when clicking on the "Add" button
+    ingredients = {};
+    function newElement() {
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("ingredient").value;
+        // var weightValue = document.getElementById("weight").value;
+        // ingredients[inputValue] = weightValue;
+        ingredients[inputValue] = 1;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+            alert("You must write something!");
+        } else {
+            document.getElementById("myUL").appendChild(li);
+        }
+        document.getElementById("ingredient").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                var div = this.parentElement;
+                console.log(div.innerText.slice(0, -1));
+                delete ingredients[div.innerText.slice(0, -1)];
+                div.style.display = "none";
+            }
+        }
+    }
+
+    // Add ingredients to data base for user
+    function newList() {
+        // ingredientElements = document.getElementById('myUL')
+        // inds = ingredientElements.getElementsByTagName('li')
+        // var i;
+        // for (i = 0; i < inds.length; i++) {
+        //     var txt = inds[i].innerText;
+        //     ingredients.push(txt.slice(0, -1));
+        // }
+        console.log(Object.keys(ingredients));
+        // Add shopping list to database
+        
+    }
+
+
+
+</script>
 
 {% endblock %}
