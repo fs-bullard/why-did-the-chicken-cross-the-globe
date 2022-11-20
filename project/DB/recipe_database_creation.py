@@ -24,7 +24,7 @@ for link in links:
     if 'enough' in serves:
         serves = 3
     description = json_object['props']['pageProps']['description'][3:-4]
-    url = json_object['props']['pageProps']['image']['url']
+    image = json_object['props']['pageProps']['image']['url']
     nutrition_info = json_object['props']['pageProps']['permutiveModel']['recipe']['nutrition_info']
     tags = json_object['props']['pageProps']['permutiveModel']['article']['tags']
     ingredients = []
@@ -110,7 +110,8 @@ for link in links:
 
     recipe_database.append({'title': title,
                      'description': description,
-                     'url': url,
+                     'url': page_url,
+                     'image': image,
                      'tags': tags,
                      'nutrition_info': nutrition_info,
                      'serves': int(serves),
@@ -126,7 +127,8 @@ for link in links:
     for i in range(len(ingredients)):
         all_lists_database.append({'title': title,
                         'description': description,
-                        'url': url,
+                        'url': page_url,
+                        'image': image,
                         'tags': tags,
                         'nutrition_info': nutrition_info,
                         'serves': int(serves),
@@ -147,8 +149,18 @@ df2 = pd.DataFrame.from_dict(all_lists_database)
 df2.to_excel('project/DB/all_list_database.xlsx')
 
 import json
-with open('project/DB/recipe_database.json', 'w') as f:
+with open('project/DB/recipe_database_list.json', 'w') as f:
     json.dump(recipe_database, f)
+
+recipe_database_dict = {}
+for recipe in recipe_database:
+    recipe_database_dict[recipe['title']] = recipe
+import json
+with open('project/DB/recipe_database_dict.json', 'w') as f:
+    json.dump(recipe_database_dict, f)
+
+
+
 
 
 

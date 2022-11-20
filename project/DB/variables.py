@@ -56,9 +56,16 @@ def get_possible_foods():
             possible_foods.append(food)
     return possible_foods
 
+def get_all_recipe_list():
+    import json
+    with open('project/DB/recipe_database_list.json') as json_file:
+        recipes_data = json.load(json_file)
+        json_file.close()
+    return recipes_data
+
 def get_all_recipe_dict():
     import json
-    with open('project/DB/recipe_database.json') as json_file:
+    with open('project/DB/recipe_database_dict.json') as json_file:
         recipes_data = json.load(json_file)
         json_file.close()
     return recipes_data

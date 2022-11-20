@@ -10,7 +10,7 @@ def get_recipes(ingredients):
         include_list = []
         for ingredient in ingredients:
             include = False
-            for category in eval(recipe[8]):
+            for category in eval(recipe[9]):
                 if category:
                     for food_type in category_map[category]:
                         if food_type == ingredient.lower():
@@ -30,8 +30,9 @@ def get_recipe_data(recipes):
             recipes_data[recipe_data[1]] = {
                 'description': recipe_data[2], 
                 'url': recipe_data[3],
-                'ingredients': recipe_data[7],
-                'carbon_footprint': recipe_data[12],
-                'land_use': recipe_data[14],
+                'image': recipe_data[4],
+                'ingredients': recipe_data[8],
+                'carbon_footprint': recipe_data[13],
+                'land_use': recipe_data[15],
             }
     return recipes_data
