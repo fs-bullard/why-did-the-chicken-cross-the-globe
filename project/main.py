@@ -4,7 +4,6 @@ from flask import request, render_template, session, redirect, url_for, flash
 from flask_login import login_required, current_user
 from .models import User
 from . import db
-import datetime
 from .get_recipes import get_recipes, get_recipe_data
 
 main = Blueprint('main', __name__)
@@ -17,6 +16,10 @@ def index():
 @login_required
 def profile():
     return render_template('profile.html', title='Profile', name=current_user.name)
+
+@main.route('/info')
+def info():
+    return render_template('info.html', title='Info')
 
 @main.route('/addlist')
 def add_list():
@@ -37,8 +40,56 @@ def recipes():
 
     recipes = get_recipes(ingredients)
     recipes_data = get_recipe_data(recipes)
-    print(recipes_data)
-
+    # print(recipes_data)
     return render_template('recipes.html', title='Recipes', recipes=recipes_data, n=len(recipes))
+
+@main.route('/choice')
+@login_required
+def recipe_choice():
+    recipe_key = request.form.get('recipe')
+    print(recipe_key)
+    recipe = get_recipe_data([recipe_key])
+    print(recipe)
+    return render_template('chosen_recipe.html', recipe=recipe)
+
+@main.route('/chicken')
+@login_required
+def chicken():
+    return render_template('chicken.html', title='Recipes')
+
+@main.route('/bake')
+@login_required
+def bake():
+    key = 'Chicken pasta bake'
+    recipe = get_recipe_data([key])
+    graph_url = "https://chart-studio.plotly.com/~YMTran/2.embed"
+
+    return render_template('chosen_recipe.html', recipe=recipe, key=key, graph=graph_url)
+
+@main.route('/ragu')
+@login_required
+def ragu():
+    key = 'Chicken & chorizo ragu'
+    recipe = get_recipe_data([key])
+    graph_url = "https://chart-studio.plotly.com/~YMTran/2.embed"
+
+    return render_template('chosen_recipe.html', recipe=recipe, key=key, graph=graph_url )
+
+@main.route('/mustard')
+@login_required
+def mustard():
+    key = "Mustard & parmesan- crumbed chicken"
+    recipe = get_recipe_data([key])
+    graph_url = "https://chart-studio.plotly.com/~YMTran/2.embed"
+    return render_template('chosen_recipe.html', recipe=recipe, key=key, graph=graph_url )
+
+@main.route('/roast')
+@login_required
+def roast():
+    key = "Roast chicken with squashed new potatoes & cheesy creamed spinach"
+    recipe = get_recipe_data([key])
+    graph_url = "https://chart-studio.plotly.com/~YMTran/17.embed"
+
+    return render_template('chosen_recipe.html', recipe=recipe, key=key, graph=graph_url)
 
 

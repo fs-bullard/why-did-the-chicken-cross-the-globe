@@ -2,6 +2,34 @@
 
 
 {% block content %}
-<a type="button" class="btn btn-primary" style="margin-top:40vh" href="/addlist">Create new shopping list</a> 
+<a type="button" class="btn btn-primary" style="margin-top:40vh" onclick="myMove()">Enter Ingredients!</a> 
+
+<img id="animation" src="https://thumbs.dreamstime.com/b/cartoon-stalk-broccoli-running-wearing-athletic-shoes-illustration-204496719.jpg">
+
+
+<script>
+
+var id = null;
+function myMove() {
+    var elem = document.getElementById("animation");
+    elem.style.opacity = '100%';
+    var pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 1);
+    function frame() {
+        if (pos == 1500) {
+            elem.style.opacity = '0%';
+            clearInterval(id);
+            window.location = "/addlist"
+        } else {
+            pos = pos + 5
+            elem.style.left = pos + 'px';
+        }
+    }
+}
+
+
+
+</script>
 
 {% endblock %}

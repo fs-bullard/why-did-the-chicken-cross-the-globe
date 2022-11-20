@@ -1,26 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<h2>Check a box to select a recipe, <i>be good ;)</i></h2>
 <table class="table">
     <thead>
       <tr>
         <th scope="col"></th>
         <th scope="col">Name</th>
-        <th scope="col">Carbon Footprint</th>
-        <th scope="col">Land Use</th>
+        <th scope="col">Carbon Footprint (kg)</th>
+        <th scope="col">Land Use (m<sup>2</sup>)</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
         {% for key in recipes.keys() %}
       <tr>
-        <th scope="row"><img class="img-thumbnail" style="width:10hh; max-height: 10vh;" src={{ recipes[key]['url'] }} ></th>
-        <td><a href="">{{ key }}</a></td>
+        <th scope="row"><img class="img-thumbnail" style="width:10hh; max-height: 10vh;" src={{ recipes[key]['image'] }} ></th>
+        <td><a href={{ recipes[key]['url'] }}>{{ key }}</a></td>
         <td>{{ recipes[key]['carbon_footprint'] }}</td>
         <td>{{ recipes[key]['land_use'] }}</td>
-      </tr>
+        <td><a type="button" class="btn btn-primary"href="/choice">Select</a></td>
+        </tr>
       {% endfor %}
     </tbody>
   </table>
 
+  <!-- <a type="button" class="btn btn-primary" onclick="newList()">Submit</a> -->
+
 {% endblock %}
+
+
+

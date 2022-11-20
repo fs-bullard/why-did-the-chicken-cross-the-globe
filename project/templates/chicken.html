@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Check a box to select a recipe, be <i>green ;)</i></h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Carbon Footprint (kg)</th>
+        <th scope="col">Land Use (m<sup>2</sup>)</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><img class="img-thumbnail" style="width:10hh; max-height: 10vh;" src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chicken_pasta_bake-06fe2d6.jpg"></th>
+        <td><a href="https://www.bbcgoodfood.com/recipes/chicken-pasta-bake">Chicken Pasta Bake</a></td>
+        <td>1.88</td>
+        <td>4.21</td>
+        <td><a type="button" class="btn btn-primary"href="/bake">Select</a></td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+          <th scope="row"><img class="img-thumbnail" style="width:10hh; max-height: 10vh;" src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chicken-chorizo-ragu-95dc274.jpg"></th>
+          <td><a href="https://www.bbcgoodfood.com/recipes/chicken-chorizo-ragu">Chicken and Chorizo Ragu</a></td>
+          <td>2.4</td>
+          <td>2.8</td>
+          <td><a type="button" class="btn btn-primary"href="/ragu">Select</a></td>
+          </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th scope="row"><img class="img-thumbnail" style="width:10hh; max-height: 10vh;" src="https://images.immediate.co.uk/production/volatile/sites/30/2022/10/Mustard-and-parmesan-crumbed-chicken-43562fc.jpg"></th>
+          <td><a href="https://www.bbcgoodfood.com/recipes/https://www.bbcgoodfood.com/recipes/mustard-parmesan-crumbed-chicken">Mustard and Parmesan Crumbled Chicken</a></td>
+          <td>2.9</td>
+          <td>5.2</td>
+          <td><a type="button" class="btn btn-primary"href="/mustard">Select</a></td>
+          </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th scope="row"><img class="img-thumbnail" style="width:10hh; max-height: 10vh;" src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/roast-chicken-with-squashed-baby-roasties-cheesy-creamed-spinach-d7dab55.jpg"></th>
+          <td><a href="https://www.bbcgoodfood.com/recipes/roast-chicken-squashed-new-potatoes-cheesy-creamed-spinach">Roast Chicken</a></td>
+          <td>0.25</td>
+          <td>0.33</td>
+          <td><a type="button" class="btn btn-primary"href="/roast">Select</a></td>
+          </tr>
+      </tbody>
+  </table>
+
+  <!-- <a type="button" class="btn btn-primary" onclick="newList()">Submit</a> -->
+
+{% endblock %}
+
+
+

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ key }} sustainability breakdown</h2>
+<img class="img-big" src={{recipe[key]['image']}}>
+
+<iframe src={{graph}}></iframe>
+
+
+{% endblock %}

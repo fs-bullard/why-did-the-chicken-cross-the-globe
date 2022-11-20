@@ -33,6 +33,7 @@
                   
                   {{ render_nav_item('main.index', 'Home') }}
                   {% if current_user.is_authenticated %}
+                    {{ render_nav_item('main.info', 'Info') }}
                     {{ render_nav_item('main.profile', 'Profile') }}
                   {% endif %}
                   {% if not current_user.is_authenticated %}
