@@ -2,8 +2,9 @@ from flask import Blueprint
 from flask import Flask
 from flask import request, render_template, session, redirect, url_for, flash
 from flask_login import login_required, current_user
-
+from .models import User
 from . import db
+import datetime
 
 main = Blueprint('main', __name__)
 
@@ -24,7 +25,14 @@ def add_list():
         return redirect(url_for('auth.login'))
     return render_template('new_list.html', title='New List')
 
-@main.route('/recipes')
+@main.route('/recipes', methods=['POST'])
+@login_required
 def recipes():
+    ingredients = request.form.get('shopping_list')
+    print(ingredients)
+
+    
+
     return render_template('recipes.html', title='Recipes')
+
 
