@@ -13,7 +13,7 @@ def get_recipes(ingredients):
             for category in eval(recipe[8]):
                 if category:
                     for food_type in category_map[category]:
-                        if food_type == ingredient:
+                        if food_type == ingredient.lower():
                             include = True
             include_list.append(include)
         if all(term is True for term in include_list):
