@@ -86,7 +86,25 @@ for link in links:
                     kg_quantity = float(quantity) * 0.1
                 except:
                     kg_quantity = 0
-            kg_quantities.append(kg_quantity*multiplier/int(serves))       
+            kg_quantities.append(kg_quantity*multiplier/int(serves))
+
+
+    carbon = []
+    land_use = []
+    data = pd.read_excel('project/DB/food-footprints.xlsx')
+    eco_data = pd.DataFrame(data).values.tolist()
+    eco_dict = {}
+    for datum in eco_data:
+        eco_dict[datum[0]] = (datum[1], datum[2])
+    for index, category in enumerate(categories):
+        if category is None:
+            carbon.append(0)
+            land_use.append(0)
+        else:
+            carbon.append(eco_dict[category][0] * kg_quantities[index])
+            land_use.append(eco_dict[category][1] * kg_quantities[index])
+        
+
 
 
 
@@ -99,7 +117,11 @@ for link in links:
                      'ingredients': ingredients,
                      'categories': categories,
                      'quantities': quantities,
-                     "kg_quantities_per_portion": kg_quantities})
+                     'quantities_per_portion_kg': kg_quantities,
+                     'carbon_emission_per_ingredient_kg': carbon,
+                     'total_carbon_emission_per_portion_kg': sum(carbon),
+                     'land_use_per_ingredient_m^2': land_use,
+                     'total_land_per_portion_kg': sum(land_use)})
 
     for i in range(len(ingredients)):
         all_lists_database.append({'title': title,
@@ -111,7 +133,11 @@ for link in links:
                         'ingredients': ingredients[i],
                         'categories': categories[i],
                         'quantities': quantities[i],
-                        "kg_quantities_per_portion": kg_quantities[i]})
+                        'quantities_per_portion_kg': kg_quantities[i],
+                        'carbon_emission_per_ingredient_kg': carbon[i],
+                        'total_carbon_emission_per_portion_kg': sum(carbon),
+                        'land_use_per_ingredient_m^2': land_use[i],
+                        'total_land_per_portion_kg': sum(land_use)})
 
 
 df1 = pd.DataFrame.from_dict(recipe_database)
@@ -119,6 +145,11 @@ df1.to_excel('project/DB/recipe_database.xlsx')
 
 df2 = pd.DataFrame.from_dict(all_lists_database)
 df2.to_excel('project/DB/all_list_database.xlsx')
+
+import json
+with open('project/DB/recipe_database.json', 'w') as f:
+    json.dump(recipe_database, f)
+
 
 
 

@@ -21,4 +21,17 @@ def get_recipes(ingredients):
 
     return return_recipe_list
 
-        
+def get_recipe_data(recipes):
+    data = pd.read_excel('project/DB/recipe_database.xlsx')
+    df = pd.DataFrame(data)
+    recipes_data = {}
+    for recipe_data in df.values.tolist():
+        if recipe_data[1] in recipes:
+            recipes_data[recipe_data[1]] = {
+                'description': recipe_data[2], 
+                'url': recipe_data[3],
+                'ingredients': recipe_data[7],
+                'carbon_footprint': recipe_data[12],
+                'land_use': recipe_data[14],
+            }
+    return recipes_data

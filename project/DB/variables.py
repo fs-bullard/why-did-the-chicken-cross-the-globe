@@ -55,3 +55,10 @@ def get_possible_foods():
         for food in category_map[key]:
             possible_foods.append(food)
     return possible_foods
+
+def get_all_recipe_dict():
+    import json
+    with open('project/DB/recipe_database.json') as json_file:
+        recipes_data = json.load(json_file)
+        json_file.close()
+    return recipes_data
