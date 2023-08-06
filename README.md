@@ -1,5 +1,7 @@
 # Why did the chicken cross the globe?
 
+Our project for Durhack 2022, selected as one of the top 5 projects to present in front of the whole hackathon.
+
 This web app allows users to get recipe recommendations by inputting ingredients. Entering a list of ingredients returns a list of recipes using these ingredients. 
 
 Recipes were scraped from BBC GoodFood, using the BeautifulSoup Python library. 
